@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 const categorys = [
 	{ title: 'Все' },
 	{ title: 'Мясные' },
@@ -9,19 +7,18 @@ const categorys = [
 	{ title: 'Закрытые' },
 ]
 
-function Catagery() {
+function Catagery(props) {
 
-	const [activeCategory, setActiveCategory] = useState(0)
-
+	const { value, onClickCategory } = props;
 
 	return (
 		<div className='categories'>
 			<ul>
-				{categorys.map((item, index) => (
+				{categorys.map((item, i) => (
 					<li
 						key={item.title}
-						className={activeCategory === index ? 'active' : ''}
-						onClick={() => setActiveCategory(index)}>{item.title}
+						className={value === i ? 'active' : ''}
+						onClick={() => onClickCategory(i)}>{item.title}
 					</li>)
 				)}
 			</ul>

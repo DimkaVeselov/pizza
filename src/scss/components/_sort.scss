@@ -6,8 +6,16 @@
 		display: flex;
 		align-items: center;
 
+		&.active {
+			svg {
+				transform: rotate(0deg);
+			}
+		}
+
 		svg {
 			margin-right: 8px;
+			transform: rotate(180deg);
+			transition: transform 0.35s ease;
 		}
 
 		b {
@@ -31,7 +39,7 @@
 		border-radius: 10px;
 		overflow: hidden;
 		padding: 10px 0;
-		width: 160px;
+		// width: 160px;
 
 		ul {
 			overflow: hidden;

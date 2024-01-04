@@ -1,20 +1,28 @@
 import { useState } from "react";
 
-const sortList = ['популярности', 'цене', 'алфавиту']
+const sortList = [
+	{ name: 'популярности ↓', sortProperty: 'rating' },
+	{ name: 'популярности ↑', sortProperty: '-rating' },
+	{ name: 'цене ↓', sortProperty: 'price' },
+	{ name: 'цене ↑', sortProperty: '-price' },
+	{ name: 'алфавиту ↓', sortProperty: 'title' },
+	{ name: 'алфавиту ↑', sortProperty: '-title' },
+]
 
-function Sort() {
+function Sort(props) {
 
-	const [isVisiblePopup, setIsVisiblePopup] = useState(false)
-	const [selectedSortItem, setSelectedSortItem] = useState(0)
+	const { value, onClickSort } = props;
+
+	const [isVisiblePopup, setIsVisiblePopup] = useState(false);
 
 	const onClickSelectItem = (i) => {
-		setSelectedSortItem(i)
+		onClickSort(i)
 		setIsVisiblePopup(false)
 	}
 
 	return (
 		<div className='sort'>
-			<div className='sort__label' >
+			<div className={`sort__label ${isVisiblePopup ? 'active' : ''}`} >
 				<svg
 					width='10'
 					height='6'
@@ -27,18 +35,18 @@ function Sort() {
 					/>
 				</svg>
 				<b>Сортировка по:</b>
-				<span onClick={() => setIsVisiblePopup(!isVisiblePopup)}>{sortList[selectedSortItem]}</span>
+				<span onClick={() => setIsVisiblePopup(!isVisiblePopup)}>{value.name}</span>
 			</div>
 			{isVisiblePopup && (
 				<div className='sort__popup'>
 					<ul>
-						{sortList.map((list, index) => (
+						{sortList.map((list) => (
 							<li
-								key={list}
-								className={selectedSortItem === index ? 'active' : ''}
-								onClick={() => onClickSelectItem(index)}
+								key={list.name}
+								className={value.sortProperty === list.sortProperty ? 'active' : ''}
+								onClick={() => onClickSelectItem(list)}
 							>
-								{list}
+								{list.name}
 							</li>
 						))}
 					</ul >
