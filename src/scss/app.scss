@@ -7,6 +7,26 @@ body {
 	background-color: $background;
 }
 
+input:-internal-autofill-selected {
+	appearance: none !important;
+	background-image: none !important;
+	background-color: rgba(0, 0, 0, 0) !important;
+	color: inherit !important;
+}
+
+input:auto-fill {
+	-webkit-text-fill-color: #fff;
+	-webkit-box-shadow: 0 0 0px 40rem #d0eaff inset;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	-webkit-text-fill-color: rgba(27, 28, 21, 1);
+	-webkit-box-shadow: 0 0 0px 40rem #d0eaff inset;
+}
+
 .wrapper {
 	width: calc(100vw - 100px);
 	height: 100%;
@@ -25,13 +45,15 @@ body {
 	padding: 40px 0;
 
 	&__title {
-		margin: 35px 0;
+		font-size: 48px;
+		font-weight: 700;
+		margin: 50px 0 30px;
 	}
 
 	&__items {
 		display: grid;
 		grid-template-columns: repeat(4, 1fr);
-		grid-template-rows: repeat(2, 1fr);
+		grid-template-rows: repeat(1, 1fr);
 		grid-gap: 0 11px;
 
 		@media (max-width: 1400px) {
@@ -126,6 +148,11 @@ body {
 				color: darken($color: #b6b6b6, $amount: 50);
 			}
 		}
+	}
+
+	.content__items {
+		display: flex;
+		flex-direction: column;
 	}
 
 	&__item {
