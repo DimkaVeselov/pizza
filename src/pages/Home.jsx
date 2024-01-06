@@ -1,21 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Catagery from '../components/Catagery';
 import Sort from '../components/Sort';
 import Pizza from '../components/Pizza';
 import Skeleton from '../components/Pizza/Skeleton';
 import Pagination from '../components/Pagination';
+import { SearchContext } from '../App';
 
 
 
 
-const Home = ({ searchValue }) => {
+const Home = () => {
+
+	const { searchValue } = useContext(SearchContext)
 
 	const [items, setItems] = useState([])
 	const [isLoading, setIsLoading] = useState(true)
 	const [activeCategory, setActiveCategory] = useState(0)
 	const [currentPage, setCurrentPage] = useState(1)
 	const [selectedSortItem, setSelectedSortItem] = useState({
-		name: 'популярности',
+		name: 'популярности ↓',
 		sortProperty: 'rating'
 	})
 
@@ -47,9 +50,9 @@ const Home = ({ searchValue }) => {
 			</div>
 			<h2 className='content__title'>Все пиццы</h2>
 			<div className='content__items'>
-				{!isLoading
-					? pizzas
-					: skeletons
+				{isLoading
+					? skeletons
+					: pizzas
 				}
 			</div>
 			<Pagination onChangePage={number => setCurrentPage(number)} />
