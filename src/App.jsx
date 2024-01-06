@@ -1,14 +1,14 @@
 import { Routes, Route } from 'react-router-dom';
+import { createContext, useState } from 'react';
 
 import Home from './pages/Home';
 import Cart from './pages/Cart';
 import NotFound from './pages/NotFound';
 import Header from './components/Header';
 
-
-
 import './scss/app.scss';
-import { useState } from 'react';
+
+export const SearchContext = createContext()
 
 function App() {
 
@@ -17,16 +17,19 @@ function App() {
 
 	return (
 		<div className='wrapper'>
-			<Header searchValue={searchValue} setSearchValue={setSearchValue} />
-			<div className='content'>
+			<SearchContext.Provider value={{ searchValue, setSearchValue }}>
 
-				<Routes>
-					<Route path='/' element={<Home searchValue={searchValue} />} />
-					<Route path='/cart' element={<Cart />} />
-					<Route path='*' element={<NotFound />} />
-				</Routes>
+				<Header />
+				<div className='content'>
 
-			</div>
+					<Routes>
+						<Route path='/' element={<Home />} />
+						<Route path='/cart' element={<Cart />} />
+						<Route path='*' element={<NotFound />} />
+					</Routes>
+
+				</div>
+			</SearchContext.Provider>
 		</div>
 	);
 }
