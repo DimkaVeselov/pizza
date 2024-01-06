@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCategoryId } from '../redux/slices/filterSlice'
+import { setCategoryId, setCurrentPage } from '../redux/slices/filterSlice'
 
 import Catagery from '../components/Catagery';
 import Sort from '../components/Sort';
@@ -14,18 +14,21 @@ import { SearchContext } from '../App';
 const Home = () => {
 
 	const dispatch = useDispatch()
-	const { categoryId, sort } = useSelector(state => state.filter)
+	const { categoryId, sort, currentPage } = useSelector(state => state.filter)
 
 	const { searchValue } = useContext(SearchContext)
 
 	const [items, setItems] = useState([])
 	const [isLoading, setIsLoading] = useState(true)
-	const [currentPage, setCurrentPage] = useState(1)
-
 
 	const onChangeCategory = (id) => {
 		dispatch(setCategoryId(id))
 	}
+
+	const onChangePage = (number) => {
+		dispatch(setCurrentPage(number))
+	}
+
 
 	const category = categoryId > 0 ? `category=${categoryId}` : ''
 	const sortBy = sort.sortProperty.replace('-', '')
@@ -45,6 +48,8 @@ const Home = () => {
 		window.scrollTo(0, 0)
 	}, [categoryId, sort, searchValue, currentPage])
 
+
+
 	const pizzas = items.map((item) => (<Pizza key={item.id} {...item} />))
 	const skeletons = [...new Array(6)].map((_, i) => <Skeleton key={i} />)
 
@@ -61,7 +66,7 @@ const Home = () => {
 					: pizzas
 				}
 			</div>
-			<Pagination onChangePage={number => setCurrentPage(number)} />
+			<Pagination currentPage={currentPage} onChangePage={onChangePage} />
 		</div>
 	)
 }
