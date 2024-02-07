@@ -29,6 +29,7 @@ input:-webkit-autofill:active {
 
 .wrapper {
 	width: calc(100vw - 100px);
+	min-height: calc(100vh - 100px);
 	height: 100%;
 	background-color: #fff;
 	margin: 50px auto;
@@ -324,11 +325,12 @@ input:-webkit-autofill:active {
 
 	&--empty {
 		margin: 0 auto;
-		width: 560px;
+		width: 620px;
 		text-align: center;
 
 		h2 {
-			font-size: 32px;
+			font-size: 40px;
+			font-weight: 800;
 			margin-bottom: 10px;
 		}
 

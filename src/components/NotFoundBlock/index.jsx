@@ -1,6 +1,9 @@
 import st from './NotFoundBlock.module.scss'
 
-export const NotFoundBlock = () => {
+export const NotFoundBlock = (props) => {
+
+	const { text } = props
+
 	return (
 		<div className={st.root}>
 			<h1>
@@ -8,8 +11,7 @@ export const NotFoundBlock = () => {
 				<br />
 				Ничего не найдено
 			</h1>
-			<p className={st.descr} >К сожалени данная страница отсутствует в нашем интернет-магазине</p>
+			<p className={st.descr} >{text}</p>
 		</div >
 	)
 }
-

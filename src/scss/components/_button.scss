@@ -12,6 +12,27 @@
 	border: 1px solid transparent;
 	@include noselect();
 
+	&[disabled] {
+		border-color: rgba(0, 0, 0, 0.25);
+		cursor: default;
+
+		svg {
+			path {
+				fill: rgba(0, 0, 0, 0.25);
+			}
+		}
+
+		&:hover {
+			background-color: rgba(255, 255, 255, 0.25);
+
+			svg {
+				path {
+					fill: rgba(0, 0, 0, 0.25);
+				}
+			}
+		}
+	}
+
 	&,
 	span {
 		color: #fff;
