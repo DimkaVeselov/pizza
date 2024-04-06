@@ -179,4 +179,10 @@
 			white-space: nowrap;
 		}
 	}
+
+	&--back {
+		display: flex;
+		width: fit-content;
+		align-items: center;
+	}
 }
