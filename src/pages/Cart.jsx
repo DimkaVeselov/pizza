@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import CartItem from "../components/CartItem"
-import { clearItems } from "../redux/slices/cartSlice"
+import { clearItems, selectCart } from "../redux/slices/cartSlice"
 import CartEmpty from "../components/CartEmpty"
 
 
@@ -9,7 +9,7 @@ import CartEmpty from "../components/CartEmpty"
 const Cart = () => {
 
 	const dispatch = useDispatch()
-	const { totalPrice, items } = useSelector(state => state.cart)
+	const { totalPrice, items } = useSelector(selectCart)
 
 	const totalCount = items.reduce((sum, item) => sum + item.count, 0)
 
@@ -49,8 +49,8 @@ const Cart = () => {
 				</div>
 				<div className="cart__bottom">
 					<div className="cart__bottom-details">
-						<span> Всего пицц: <b>{totalCount} шт.</b> </span>
-						<span> Сумма заказа: <b>{totalPrice} ₽</b> </span>
+						<span> Всего пицц: <b>{totalCount}&nbsp;шт.</b> </span>
+						<span> Сумма заказа: <b>{totalPrice}&nbsp;₽</b> </span>
 					</div>
 					<div className="cart__bottom-buttons">
 						<Link to="/" className="button button--outline button--add go-back-btn">

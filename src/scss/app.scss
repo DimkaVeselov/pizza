@@ -29,10 +29,10 @@ input:-webkit-autofill:active {
 
 .wrapper {
 	width: calc(100vw - 100px);
-	min-height: calc(100vh - 100px);
+	min-height: calc(100vh - 50px);
 	height: 100%;
 	background-color: #fff;
-	margin: 50px auto;
+	margin: 25px auto;
 	border-radius: 10px;
 	max-width: 1400px;
 
@@ -43,19 +43,20 @@ input:-webkit-autofill:active {
 }
 
 .content {
-	padding: 40px 0;
+	padding: 20px 0;
 
 	&__title {
 		font-size: 48px;
 		font-weight: 700;
-		margin: 50px 0 30px;
+		margin: 40px 0 30px;
 	}
 
 	&__items {
 		display: grid;
 		grid-template-columns: repeat(4, 1fr);
 		grid-template-rows: repeat(1, 1fr);
-		grid-gap: 0 11px;
+		grid-gap: 11px;
+		margin-bottom: 30px;
 
 		@media (max-width: 1400px) {
 			grid-template-columns: repeat(3, 1fr);
@@ -67,6 +68,7 @@ input:-webkit-autofill:active {
 
 		@media (max-width: 730px) {
 			grid-template-columns: repeat(1, 1fr);
+			grid-gap: 15px;
 		}
 	}
 
@@ -441,11 +443,94 @@ input:-webkit-autofill:active {
 
 		p {
 			font-size: 22px;
-			margin-bottom: 10px;
+			margin-bottom: 20px;
 
 			@media (max-width: 768px) {
 				font-size: 14px;
 			}
+		}
+	}
+}
+
+.pizza-page {
+	&__wrap {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: flex-start;
+		justify-content: center;
+		gap: 30px;
+		margin-top: 30px;
+	}
+
+	&__image {
+		width: 350px;
+		img {
+			width: 100%;
+			height: auto;
+			object-fit: cover;
+		}
+	}
+
+	&__content {
+		flex: 1 1 70%;
+		max-width: 550px;
+		margin-top: 15px;
+	}
+
+	&__title {
+	}
+
+	&__descr {
+		font-size: 20px;
+		margin-top: 10px;
+	}
+
+	.go-back-btn {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 210px;
+
+		border-color: darken($color: $gray-line, $amount: 10);
+
+		span {
+			color: darken($color: $gray-line, $amount: 20);
+			font-weight: 500;
+			font-weight: 600;
+		}
+
+		&:hover {
+			background-color: darken($color: $gray-line, $amount: 90);
+			border-color: darken($color: $gray-line, $amount: 90);
+
+			span {
+				color: $gray-line;
+			}
+		}
+
+		svg {
+			margin-right: 12px;
+			path {
+				fill: transparent;
+				stroke-width: 2;
+			}
+		}
+	}
+
+	.button {
+		border-color: darken($color: $gray-line, $amount: 10);
+	}
+
+	.button {
+		svg {
+			width: 11.5px;
+			height: 11.5px;
+			position: relative;
+		}
+		&:hover,
+		&:active {
+			border-color: darken($color: $gray-line, $amount: 80);
+			background-color: darken($color: $gray-line, $amount: 80);
 		}
 	}
 }

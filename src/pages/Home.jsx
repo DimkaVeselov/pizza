@@ -1,18 +1,16 @@
-import { useContext, useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom'
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import qs from 'qs'
 import { useNavigate } from 'react-router-dom';
-import { setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice'
+import { selectFilter, setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice'
 
 import Catagery from '../components/Catagery';
 import Sort, { sortList } from '../components/Sort';
-import Pizza from '../components/Pizza';
+import Pizza from '../components/Pizza/index';
 import Skeleton from '../components/Pizza/Skeleton';
 import Pagination from '../components/Pagination';
-
-import { SearchContext } from '../App';
-import { fetchPizzas } from '../redux/slices/pizzasSlice';
+import { fetchPizzas, selectPizzas } from '../redux/slices/pizzasSlice';
+import PizzasEmpty from '../components/PizzasEmpty';
 
 const Home = () => {
 	const navigate = useNavigate()
@@ -20,10 +18,8 @@ const Home = () => {
 	const isSearch = useRef(false)
 	const isMounted = useRef(false)
 
-	const { items, status } = useSelector(state => state.pizzas)
-	const { categoryId, sort, currentPage } = useSelector(state => state.filter)
-
-	const { searchValue } = useContext(SearchContext)
+	const { items, status } = useSelector(selectPizzas)
+	const { categoryId, sort, currentPage, searchValue } = useSelector(selectFilter)
 
 
 	const onChangeCategory = (id) => {
@@ -94,6 +90,7 @@ const Home = () => {
 
 
 	const pizzas = items.map((item) => (<Pizza key={item.id} {...item} />))
+
 	const skeletons = [...new Array(4)].map((_, i) => <Skeleton key={i} />)
 
 	return (
@@ -104,16 +101,7 @@ const Home = () => {
 			</div>
 			<h2 className='content__title'>Все пиццы</h2>
 			{status === 'error' ?
-				<div className="cart cart--empty cart--error">
-					<h2>Произошла ошибка <span>😕</span></h2>
-					<p>
-						К сожалению не удалось получить пиццы<br />
-						Попробуйте позже
-					</p>
-					<Link to="/" className="button button--black">
-						<span>Попробовать еще раз</span>
-					</Link>
-				</div>
+				<PizzasEmpty />
 				:
 				<>
 					<div className='content__items'>
@@ -122,7 +110,7 @@ const Home = () => {
 							: pizzas
 						}
 					</div>
-					<Pagination currentPage={currentPage} onChangePage={onChangePage} />
+					<Pagination currentPage={currentPage} onChangePage={onChangePage} pageCount={3} />
 				</>
 			}
 
