@@ -1,7 +1,7 @@
 import ContentLoader from "react-content-loader"
 
 const Skeleton = () => (
-	<div div className="pizza-block-wrap" >
+	<div className="pizza-block-wrap" >
 		<ContentLoader
 			className="pizza-block"
 			speed={2}

@@ -22,11 +22,11 @@ const Home = () => {
 	const { categoryId, sort, currentPage, searchValue } = useSelector(selectFilter)
 
 
-	const onChangeCategory = (id) => {
+	const onChangeCategory = (id: string) => {
 		dispatch(setCategoryId(id))
 	}
 
-	const onChangePage = (number) => {
+	const onChangePage = (number: number) => {
 		dispatch(setCurrentPage(number))
 	}
 
@@ -37,6 +37,7 @@ const Home = () => {
 		const category = categoryId > 0 ? `category=${categoryId}` : '';
 
 
+		//@ts-ignore
 		dispatch(fetchPizzas({
 			currentPage,
 			sortBy,
@@ -89,7 +90,7 @@ const Home = () => {
 	}, [categoryId, sort.sortProperty, searchValue, currentPage])
 
 
-	const pizzas = items.map((item) => (<Pizza key={item.id} {...item} />))
+	const pizzas = items.map((item: any) => (<Pizza key={item.id} {...item} />))
 
 	const skeletons = [...new Array(4)].map((_, i) => <Skeleton key={i} />)
 

@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom'
-
 const PizzasEmpty = () => {
 	return (
 		<div className="cart cart--empty cart--error">
@@ -8,7 +6,7 @@ const PizzasEmpty = () => {
 				К сожалению не удалось получить пиццы<br />
 				Попробуйте позже
 			</p>
-			<button to="/" onClick={() => window.location.reload()} className="button button--black">
+			<button onClick={() => window.location.reload()} className="button button--black">
 				<span>Попробовать еще раз</span>
 			</button>
 		</div>

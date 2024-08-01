@@ -4,7 +4,12 @@ import { useParams, Link, useNavigate } from "react-router-dom"
 import ContentLoader from "react-content-loader"
 
 const PizzaPage = () => {
-	const [data, setData] = useState()
+	const [data, setData] = useState<{
+		imageUrl: string
+		title: string
+		description: string
+		price: number
+	}>()
 	const { id } = useParams()
 	const navigate = useNavigate()
 
@@ -14,13 +19,13 @@ const PizzaPage = () => {
 			setData(data)
 		} catch (error) {
 			navigate('/*')
-			console.log(error);
+			console.error(error);
 		}
 	}
 
 	useEffect(() => {
 		fetchPizza()
-	}, [id])
+	}, [])
 
 
 	if (!data) {
@@ -69,7 +74,10 @@ const PizzaPage = () => {
 						<img src={data?.imageUrl} alt="" />
 					</div>
 					<div className='pizza-page__content'>
-						<h1 className='pizza-page__title'>{data?.title}</h1>
+						<h1 className='pizza-page__title'>{data?.title}
+							<span className='pizza-page__price'>от&nbsp;{data?.price}&nbsp;₽</span>
+						</h1>
+						
 						<p className='pizza-page__descr'>{data?.description}</p>
 					</div>
 				</div>

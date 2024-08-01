@@ -490,6 +490,12 @@ input:-webkit-autofill:active {
 		margin-top: 10px;
 	}
 
+	&__price {
+		margin-left: 15px;
+		font-weight: 800;
+		font-size: 40px;
+	}
+
 	.go-back-btn {
 		display: flex;
 		align-items: center;

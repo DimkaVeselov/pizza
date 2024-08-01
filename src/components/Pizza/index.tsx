@@ -3,17 +3,48 @@ import { useSelector, useDispatch } from "react-redux"
 import { addItems } from "../../redux/slices/cartSlice"
 import { Link } from "react-router-dom"
 
+type PizzaPropsType = {
+	id: string;
+	title: string;
+	price: number;
+	imageUrl: string;
+	sizes: number[];
+	types: number[];
+	raiting: number
+}
+
+type CartItemType = {
+    id: string;
+    title: string;
+    price: number;
+    imageUrl: string;
+    type: string;
+    size: number;
+    count: number;
+};
+
+type RootState = {
+    cart: {
+        items: CartItemType[];
+    };
+};
+
 const typeNames = ['тонкое', 'традиционное']
 
-function Pizza(props) {
-	const { id, title, price, imageUrl, sizes, types, raiting } = props
+const Pizza: React.FC<PizzaPropsType> = ({ id, title, price, imageUrl, sizes, types }) => {
 
 	const dispatch = useDispatch()
 
-	const [activeSizePizzas, setActiveSizePizzas] = useState(0)
-	const [activeTypePizzas, setActiveTypePizzas] = useState(0)
+	const [activeSizePizzas, setActiveSizePizzas] = useState<number>(0)
+	const [activeTypePizzas, setActiveTypePizzas] = useState<number>(0)
 
-	const cartItem = useSelector(state => state.cart.items.find(obj => obj.id === id && obj.type === typeNames[activeTypePizzas] && obj.size === sizes[activeSizePizzas]))
+	const cartItem = useSelector((state: RootState) =>
+        state.cart.items.find((obj: CartItemType) =>
+            obj.id === id &&
+            obj.type === typeNames[activeTypePizzas] &&
+            obj.size === sizes[activeSizePizzas]
+        )
+    );
 
 
 
