@@ -10,7 +10,7 @@ type CartItemType = {
     price: number;
     imageUrl: string;
     type: string;
-    size: string;
+    size: number;
     count: number;
 };
 

@@ -1,10 +1,10 @@
 import { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { addItems } from "../../redux/slices/cartSlice"
+import { addItems, CartItemType } from "../../redux/slices/cartSlice"
 import { Link } from "react-router-dom"
 
 type PizzaPropsType = {
-	id: string;
+	id: number;
 	title: string;
 	price: number;
 	imageUrl: string;
@@ -13,20 +13,10 @@ type PizzaPropsType = {
 	raiting: number
 }
 
-type CartItemType = {
-    id: string;
-    title: string;
-    price: number;
-    imageUrl: string;
-    type: string;
-    size: number;
-    count: number;
-};
-
 type RootState = {
-    cart: {
-        items: CartItemType[];
-    };
+		cart: {
+				items: CartItemType[];
+		};
 };
 
 const typeNames = ['тонкое', 'традиционное']
@@ -39,25 +29,24 @@ const Pizza: React.FC<PizzaPropsType> = ({ id, title, price, imageUrl, sizes, ty
 	const [activeTypePizzas, setActiveTypePizzas] = useState<number>(0)
 
 	const cartItem = useSelector((state: RootState) =>
-        state.cart.items.find((obj: CartItemType) =>
-            obj.id === id &&
-            obj.type === typeNames[activeTypePizzas] &&
-            obj.size === sizes[activeSizePizzas]
-        )
-    );
-
-
+		state.cart.items.find((obj: CartItemType) =>
+			obj.id === id &&
+			obj.type === typeNames[activeTypePizzas] &&
+			obj.size === sizes[activeSizePizzas]
+		)
+	);
 
 	const addedCount = cartItem ? cartItem.count : 0
 
 	const onClickAdd = () => {
-		const item = {
+		const item: CartItemType = {
 			id,
 			title,
 			price,
 			imageUrl,
 			type: typeNames[activeTypePizzas],
-			size: sizes[activeSizePizzas]
+			size: sizes[activeSizePizzas],
+			count: 0
 		}
 		dispatch(addItems(item))
 	}
