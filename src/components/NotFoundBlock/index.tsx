@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
 import st from './NotFoundBlock.module.scss'
 
-export const NotFoundBlock = (props) => {
+type NotFoundBlockType = {
+	text: string;
+}
 
-	const { text } = props
+export const NotFoundBlock: React.FC <NotFoundBlockType> = ({text}) => {
 
 	return (
 		<div className={st.root}>

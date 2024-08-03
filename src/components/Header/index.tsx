@@ -11,7 +11,8 @@ function Header() {
 
 	const location = useLocation()
 
-	const totalCount = items.reduce((sum, item) => sum + item.count, 0)
+	// TODO: заменить any
+	const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0)
 
 	return (
 		<div className='header'>
@@ -29,7 +30,7 @@ function Header() {
 				{location.pathname === '/' &&
 					<>
 					<Search />
-						<div div className='header__cart'>
+						<div className='header__cart'>
 							<Link to='/cart' className='button button--cart'>
 								<span>{totalPrice} ₽</span>
 								<div className='button__delimiter'></div>
@@ -66,9 +67,6 @@ function Header() {
 						</div>
 					</>
 				}
-
-
-
 			</div>
 		</div >
 	);

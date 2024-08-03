@@ -1,4 +1,13 @@
-const categorys = [
+type CategoryType = {
+	title: string
+}
+
+type CategoryPropsType = {
+	value: number;
+	onClickCategory: (i: number) => void;
+}
+
+const categorys: CategoryType[] = [
 	{ title: 'Все' },
 	{ title: 'Мясные' },
 	{ title: 'Вегетарианская' },
@@ -7,10 +16,7 @@ const categorys = [
 	{ title: 'Закрытые' },
 ]
 
-function Catagery(props) {
-
-	const { value, onClickCategory } = props;
-
+const Catagery: React.FC<CategoryPropsType> = ({ value, onClickCategory }) => {
 	return (
 		<div className='categories'>
 			<ul>
