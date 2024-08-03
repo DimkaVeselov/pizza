@@ -22,7 +22,7 @@ const Home = () => {
 	const { categoryId, sort, currentPage, searchValue } = useSelector(selectFilter)
 
 
-	const onChangeCategory = (id: string) => {
+	const onChangeCategory = (id: number) => {
 		dispatch(setCategoryId(id))
 	}
 

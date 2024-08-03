@@ -4,7 +4,7 @@ type CategoryType = {
 
 type CategoryPropsType = {
 	value: number;
-	onClickCategory: any
+	onClickCategory: (i: number) => void;
 }
 
 const categorys: CategoryType[] = [

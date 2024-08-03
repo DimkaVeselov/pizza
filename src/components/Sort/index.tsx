@@ -30,19 +30,18 @@ function Sort() {
 	}
 
 	useEffect(() => {
-		// TODO типизировать e
-		const handleClickOutside = (e: any) => {
-			let path = e.composedPath();
-
-			if (!path.includes(sortRef.current)) {
-				setIsVisiblePopup(false)
+		const handleClickOutside = (e: MouseEvent) => {
+			if (sortRef.current && !sortRef.current.contains(e.target as Node)) {
+				setIsVisiblePopup(false);
 			}
 		}
 
-		document.body.addEventListener('click', handleClickOutside)
+		document.body.addEventListener('click', handleClickOutside);
 
-		return () => document.body.removeEventListener('click', handleClickOutside)
-	}, [])
+		return () => {
+			document.body.removeEventListener('click', handleClickOutside);
+		}
+	}, []);
 
 	return (
 		<div ref={sortRef} className='sort' >
